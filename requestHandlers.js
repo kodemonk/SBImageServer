@@ -19,7 +19,7 @@ function streamFile(file,resp,contentType) {
 }
 
 
-function getProfilePic(query,response,) {
+function getProfilePic(query,response) {
   response.writeHead(200, {"Content-Type": "text/html"}); //text/plain
   if(query.name){
   	reponse.write(query.name);
