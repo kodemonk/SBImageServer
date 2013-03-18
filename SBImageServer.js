@@ -9,12 +9,12 @@ var handle = {};
 	handle["/getProfilePic"] = requestHandlers.getProfilePic;
 
 
-function dispatch(pathname,response) 
+function dispatch(pathname,query,response) 
 {
   //Dispatcher can route requests either to a script or to a node.js function
   if (typeof handle[pathname] === 'function') 
   {
-    handle[pathname](response);
+    handle[pathname](query,response);
   } 
   else
   {
@@ -27,7 +27,8 @@ function dispatch(pathname,response)
 function onRequest(request, response) 
 {
   var pathname = url.parse(request.url).pathname;
-  dispatch(pathname,response);
+  var query = url.parse(request.url,true).query;
+  dispatch(pathname,query,response);
 }
 http.createServer(onRequest).listen(httpPort);
 util.log("SBImageServer::httpserver started, serving requests on port: " + httpPort);
